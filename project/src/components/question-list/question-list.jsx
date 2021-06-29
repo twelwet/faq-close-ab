@@ -2,22 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function QuestionList(props) {
-  const {faq} = props;
+  const {faq, isSearched} = props;
   return (
-    <ul className={'question-list'}>
-      {
-        faq
-          .map(
-            (item) => (
-              <li key={item.id}>
-                <h3>{item.id}. {item.question}</h3>
-                <h4 className={'answer-header'}>Ответ:</h4>
-                {item.answer.map((part) => (<p className={'answer-part'} key={part}>{part}</p>))}
-              </li>
-            ),
-          )
-      }
-    </ul>
+    <div>
+      <h3>{isSearched ? 'Результаты поиска' : 'Весь список'}</h3>
+      <ul className={'question-list'}>
+        {
+          faq
+            .map(
+              (item) => (
+                <li key={item.id}>
+                  <h4>{item.id}. {item.question}</h4>
+                  <h5 className={'answer-header'}>Ответ:</h5>
+                  {item.answer.map((part) => (<p className={'answer-part'} key={part}>{part}</p>))}
+                </li>
+              ),
+            )
+        }
+      </ul>
+    </div>
   );
 }
 
@@ -27,6 +30,7 @@ QuestionList.propTypes = {
     question: PropTypes.string,
     answer: PropTypes.arrayOf(PropTypes.string),
   })).isRequired,
+  isSearched: PropTypes.bool.isRequired,
 };
 
 export default QuestionList;

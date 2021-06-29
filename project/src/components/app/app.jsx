@@ -23,7 +23,7 @@ function App() {
           onChange={handleFieldChange}
         />
       </div>
-      <QuestionList faq={filteredFaq}/>
+      <QuestionList faq={filteredFaq} isSearched={text !== ''}/>
     </main>
   );
 }
